@@ -110,29 +110,41 @@ Coded by www.creative-tim.com
   <div class="wrapper ">
     <div class="sidebar" data-color="white" data-active-color="danger">
       <div class="logo">
-        <a href="https://www.creative-tim.com" class="simple-text logo-mini">
-          <!-- <div class="logo-image-small">
-            <img src="../assets/img/logo-small.png">
-          </div> -->
-          <!-- <p>CT</p> -->
-        </a>
         <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-          VEAITGR
+          COVID DATA VISUALIZATION
           <!-- <div class="logo-image-big">
             <img src="../assets/img/logo-big.png">
           </div> -->
         </a>
       </div>
-      <div class="sidebar-wrapper">
-        <div>
-            <p class="simple-text logo-normal">Filter By</p>
-        </div>
+     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="active ">
-                <p>Continent</p>
-            </li>
+            <li class="active">
+            <a href="#filtersdrop" data-toggle="collapse" aria-expanded="true">
+              <i class="tim-icons icon-atom"></i>
+              <p class="font-weight-bold">Filter By</p>
+            </a>
+              <div class="collapse" id="filtersdrop">
+              <ul class="ml-20">
+                  <li class="">
+                    <a href="">
+                      <span class="sidebar-normal">Continent</span>
+                    </a>
+                  </li>
+                  <li class="">
+                    <a href="">
+                      <span class="sidebar-normal">Country</span>
+                    </a>
+                  </li>
+                  <li class="">
+                    <a href="">
+                      <span class="sidebar-normal">Time Period</span>
+                    </a>
+                  </li>
+              </ul>
+        </div>
+          </li>
         </ul>
-        
       </div>
     </div>
     <div class="main-panel">
@@ -202,7 +214,6 @@ Coded by www.creative-tim.com
         </div>
       </footer>
     </div>
-  </div>
   <!--   Core JS Files   -->
   <script src="../assets/js/core/jquery.min.js"></script>
   <script src="../assets/js/core/popper.min.js"></script>
