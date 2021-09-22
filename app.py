@@ -9,7 +9,8 @@ import dash_html_components as html
 import plotly.express as px
 import pandas as pd
 
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css', './assets/css/bootstrap.min.css', './assets/css/paper-dashboard.css?v=2.0.1'
+                    , 'https://fonts.googleapis.com/css?family=Montserrat:400,700,200', 'https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
