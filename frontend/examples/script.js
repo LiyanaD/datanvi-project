@@ -1,26 +1,19 @@
 google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(readFile);
+google.charts.setOnLoadCallback(drawMaterial);
 
-function readFile () {
-  filename = "sample.csv";
-  $.get(filename, function(csvString){
-    var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-    drawMaterial(arrayData)
-  });
-}
 
-function drawMaterial(arrayData) {
+function drawMaterial() {
     var data = new google.visualization.arrayToDataTable(arrayData)
-      // var data = google.visualization.arrayToDataTable([
-      //   ['Continent', 'Vaccinated', 'COVID Cases'],
-      //       ['Asia',  24430, 453430],
-      //       ['Europe',  73430, 834630],
-      //       ['North America',  54430, 644530],
-      //       ['South America',  53430,  534530],
-      //       ['Africa',  13430,  734530],
-      //       ['Antartica',  34530,  234530],
-      //       ['Oceania',  63530,  563530],
-      //       ]);
+      var data = google.visualization.arrayToDataTable([
+         ['Continent', 'Vaccinated', 'COVID Cases'],
+             ['Asia',  24430, 453430],
+             ['Europe',  73430, 834630],
+             ['North America',  54430, 644530],
+             ['South America',  53430,  534530],
+             ['Africa',  13430,  734530],
+             ['Antartica',  34530,  234530],
+             ['Oceania',  63530,  563530],
+             ]);
 
       var materialOptions = {
         chart: {
