@@ -18,10 +18,13 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 # see https://plotly.com/python/px-arguments/ for more options
 df = pd.read_csv('owid-covid-data.csv')
 
+# Data Processing 
 continents = ['Asia', 'Europe', 'Africa', 'North America', 'South America',
        'Oceania']
 fig = px.line(data_frame=df[df['continent'].isin(continents)],x='date',y='total_cases',color='location',hover_data=['location'], title="Line Graph of the Total Cases of the Country in the World")
 
+
+# Layout
 app.layout = html.Div(children=[
     html.H1(children='Hello Dash'),
 
@@ -35,5 +38,7 @@ app.layout = html.Div(children=[
     )
 ])
 
+
+# Run Server
 if __name__ == '__main__':
     app.run_server(debug=True)
