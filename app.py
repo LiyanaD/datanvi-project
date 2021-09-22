@@ -8,12 +8,22 @@ import dash_core_components as dcc
 import dash_html_components as html
 import plotly.express as px
 import pandas as pd
+from flask import Flask, render_template
+import plotly
 
+<<<<<<< Updated upstream
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css', './assets/css/bootstrap.min.css', './assets/css/paper-dashboard.css?v=2.0.1'
                     , 'https://fonts.googleapis.com/css?family=Montserrat:400,700,200', 'https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css']
+=======
+app = Flask(__name__)
+@app.route(‘/’)
+def notdash():
+   df = pd.read_csv('export2.csv')
+>>>>>>> Stashed changes
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+fig = px.bar(df, x=location, y=total_cases, color=”City”,    barmode=”group”)
 
+<<<<<<< Updated upstream
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
 df = pd.read_csv('owid-covid-data.csv')
@@ -37,3 +47,8 @@ app.layout = html.Div(children=[
 
 if __name__ == '__main__':
     app.run_server(debug=True)
+=======
+graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+return render_template(‘notdash.html’, graphJSON=graphJSON)
+>>>>>>> Stashed changes

@@ -1,8 +1,8 @@
-d3.csv("/../export2.csv", function(data) {
+d3.csv("/../export3.csv", function(data) {
     console.log(data[0]);
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
-    width = 960 - margin.left - margin.right,
+    var margin = {top: 20, right: 20, bottom: 30, left: 67},
+    width = 950 - margin.left - margin.right,
     height = 500 - margin.top - margin.bottom;
     // Set ranges
     var x = d3.scaleBand()
@@ -19,22 +19,23 @@ d3.csv("/../export2.csv", function(data) {
           "translate(" + margin.left + "," + margin.top + ")")
     
     // Format
-    data.forEach(function(d) {
-        d.total_cases = +d.total_cases;
-    });
+//    data.forEach(function(d) {
+//        d.total_cases = +d.total_cases;
+//    });
     
     // Scale the range of the data in the domains
-    x.domain(data.map(function(d) { return d.location; }));
+    x.domain(data.map(function(d) { return d.continent; }));
     y.domain([0, d3.max(data, function(d) { return d.total_cases; })]);
     
     svg.selectAll("#chart_div")
       .data(data)
       .enter().append("rect")
       .attr("class", "bar")
-      .attr("x", function(d) { return x(d.location); })
+      .attr("x", function(d) { return x(d.continent); })
       .attr("width", x.bandwidth())
       .attr("y", function(d) { return y(d.total_cases); })
       .attr("height", function(d) { return height - y(d.total_cases); });
+      
     
      // Add x axis
       svg.append("g")
