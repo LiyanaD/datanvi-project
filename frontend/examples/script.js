@@ -1,5 +1,5 @@
 d3.csv("/../export.csv", function(data) {
-    console.log(data);
+    console.log(data[0]);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
     width = 960 - margin.left - margin.right,
