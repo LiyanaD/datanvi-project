@@ -1,68 +1,47 @@
-google.charts.load('current', {'packages':['corechart']});
-    google.charts.load('current', {'packages':['corechart']});
-    google.charts.load('current', {packages: ['corechart', 'bar']});
-        google.charts.setOnLoadCallback(drawChart);
+d3.csv("/../export.csv", function(data) {
+    console.log(data);
 
-        function drawChart() {
-            var data = google.visualization.arrayToDataTable([
-            ['Continent', 'COVID Cases'],
-            ['Asia',  453430],
-            ['Europe',  834630],
-            ['North America',  644530],
-            ['South America',  534530],
-            ['Africa',  734530],
-            ['Antartica',  234530],
-            ['Oceania',  563530],
-            ]);
+    var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    width = 960 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
+    // Set ranges
+    var x = d3.scaleBand()
+          .range([0, width])
+          .padding(0.1);
+    var y = d3.scaleLinear()
+          .range([height, 0]);
+    
+    var svg = d3.select("#chart_div").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform", 
+          "translate(" + margin.left + "," + margin.top + ")")
+    
+    // Format
+    data.forEach(function(d) {
+        d.location = +d.location;
+    });
+    
+    // Scale the range of the data in the domains
+    x.domain(data.map(function(d) { return d.location; }));
+    y.domain([0, d3.max(data, function(d) { return d.total_cases; })]);
+    
+    svg.selectAll("#chart_div")
+      .data(data)
+      .enter().append("rect")
+      .attr("class", "bar")
+      .attr("x", function(d) { return x(d.location); })
+      .attr("width", x.bandwidth())
+      .attr("y", function(d) { return y(d.total_cases); })
+      .attr("height", function(d) { return height - y(d.total_cases); });
+    
+     // Add x axis
+      svg.append("g")
+          .attr("transform", "translate(0," + height + ")")
+          .call(d3.axisBottom(x));
 
-            var options = {
-            title: 'COVID Cases in 2021',
-            curveType: 'function',
-            legend: { position: 'bottom' }
-            };
-
-            var linechart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-            linechart.draw(data, options);
-
-            var data2 = google.visualization.arrayToDataTable([
-            ['Continent', 'Vaccinated'],
-            ['Asia',  24430],
-            ['Europe',  73430],
-            ['North America',  54430],
-            ['South America',  53430],
-            ['Africa',  13430],
-            ['Antartica',  34530],
-            ['Oceania',  63530],
-            ]);
-
-            var options2 = {
-              title: 'Vaccinated as of July 2021',
-              width:'100%',
-              height:600,
-              bar: {groupWidth: "45%", height:13 }, 
-              };
-
-            var chart = new google.visualization.BarChart(document.getElementById('chart_div2'));
-
-            chart.draw(data2, options2);
-
-            var data3 = google.visualization.arrayToDataTable([
-            ['Continent', 'Vaccinated', 'COVID Cases'],
-            ['Asia',  24430, 453430],
-            ['Europe',  73430, 834630],
-            ['North America',  54430, 644530],
-            ['South America',  53430,  534530],
-            ['Africa',  13430,  734530],
-            ['Antartica',  34530,  234530],
-            ['Oceania',  63530,  563530],
-            ]);
-
-            var options3 = {
-              title: 'COVID Cases V.S. Vaccinated Population',
-              hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-              vAxis: {minValue: 0}
-        };
-
-            var areachart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-            areachart.draw(data3, options3);
-      }
+      // Add y axis
+      svg.append("g")
+          .call(d3.axisLeft(y));
+});
