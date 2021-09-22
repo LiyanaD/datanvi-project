@@ -16,13 +16,11 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # assume you have a "long-form" data frame
 # see https://plotly.com/python/px-arguments/ for more options
-df = pd.DataFrame({
-    "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-    "Amount": [4, 1, 2, 2, 4, 5],
-    "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-})
+df = pd.read_csv('owid-covid-data.csv')
 
-fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
+continents = ['Asia', 'Europe', 'Africa', 'North America', 'South America',
+       'Oceania']
+fig = px.line(data_frame=df[df['continent'].isin(continents)],x='date',y='total_cases',color='location',hover_data=['location'], title="Line Graph of the Total Cases of the Country in the World")
 
 app.layout = html.Div(children=[
     html.H1(children='Hello Dash'),
