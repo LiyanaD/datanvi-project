@@ -1,4 +1,4 @@
-d3.csv("/../export.csv", function(data) {
+d3.csv("/../export2.csv", function(data) {
     console.log(data[0]);
 
     var margin = {top: 20, right: 20, bottom: 30, left: 40},
@@ -20,7 +20,7 @@ d3.csv("/../export.csv", function(data) {
     
     // Format
     data.forEach(function(d) {
-        d.location = +d.location;
+        d.total_cases = +d.total_cases;
     });
     
     // Scale the range of the data in the domains
